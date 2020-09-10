@@ -1,0 +1,28 @@
+{
+  "name": "backend-coding-challenge-gemography",
+  "version": "1.0.0",
+  "description": "Backend challenge for gemography recruiting process",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ahmedjadli/backend-coding-challenge-gemography.git"
+  },
+  "author": "Ahmed Jadli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmedjadli/backend-coding-challenge-gemography/issues"
+  },
+  "homepage": "https://github.com/ahmedjadli/backend-coding-challenge-gemography#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0"
+  }
+}
