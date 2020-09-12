@@ -47,15 +47,11 @@ const fetchGithub = async () => {
     });
 
   // extract distinct languages name from repos array
-  let Languages = [
-    ...new Set(
-      allRepos.map((repo) => repo.language).filter((repo) => repo !== null)
-    ),
-  ];
+  let Languages = [...new Set(allRepos.map((repo) => repo.language))];
 
   console.log(allRepos.length);
 
-  console.log(Languages.length);
+  console.log(Languages);
 
   let LangArr = [
     ...new Set(
@@ -68,6 +64,7 @@ const fetchGithub = async () => {
             count++;
           }
         });
+        if (lang === null) lang = "unkown";
         return new Language(lang, repos, count);
       })
     ),
