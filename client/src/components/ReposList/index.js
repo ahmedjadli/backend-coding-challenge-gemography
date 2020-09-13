@@ -25,24 +25,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ReposList = () => {
+const getRandomColor = () => {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+const getLanguageNameAbv = (name) => {
+  let word = "";
+  for (let i = 0; i < name.length; i++) {
+    if (
+      name.charAt(i) === name.charAt(i).toUpperCase() &&
+      name.charAt(i) !== " "
+    )
+      word += name.charAt(i);
+  }
+  return word;
+};
+
+const ReposList = ({ filtredRepos }) => {
   const classes = useStyles();
+
   return (
     <Paper className={classes.paper}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={4}>
-          <RepoItem />
+      {!filtredRepos.length ? (
+        "No Language Selected !"
+      ) : (
+        <Grid container spacing={2}>
+          {filtredRepos.map((lang) => {
+            let color = getRandomColor();
+            let abv = getLanguageNameAbv(lang.name);
+            console.log({ color, abv });
+            return lang.repos.map((repo) => (
+              <Grid key={repo.id} item xs={12} sm={4}>
+                <RepoItem
+                  name={lang.name}
+                  repo={repo}
+                  color={color}
+                  abv={abv}
+                />
+              </Grid>
+            ));
+          })}
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <RepoItem />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <RepoItem />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <RepoItem />
-        </Grid>
-      </Grid>
+      )}
     </Paper>
   );
 };

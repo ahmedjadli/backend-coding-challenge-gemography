@@ -13,7 +13,7 @@ const SortByLanguage = (LangArr, Repos) => {
             count++;
           }
         });
-        if (lang === null) lang = "unkown";
+        if (lang === null) lang = "Unkown";
         return new Language(lang, repos, count);
       })
     ),

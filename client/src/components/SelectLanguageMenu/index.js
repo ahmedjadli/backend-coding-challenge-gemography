@@ -44,46 +44,39 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
-function getStyles(name, personName, theme) {
+function getStyles(lang, personName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      personName.indexOf(lang) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
 }
 
-function SelectLanguageMenu() {
+function SelectLanguageMenu({
+  langNames,
+  setSelectedLanguageNames,
+  selectedLanguageNames,
+}) {
   const theme = useTheme();
-  const [LanguageName, setLanguageName] = React.useState([]);
 
   const handleChange = (event) => {
-    setLanguageName(event.target.value);
+    setSelectedLanguageNames(event.target.value);
   };
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper}>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Select Language</InputLabel>
+        <InputLabel id="demo-mutiple-chip-label">
+          {langNames.length === 0 ? "Loading" : "Select a Language"}
+        </InputLabel>
         <Select
+          disabled={langNames.length === 0}
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"
           multiple
-          value={LanguageName}
+          value={selectedLanguageNames}
           onChange={handleChange}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => (
@@ -95,13 +88,13 @@ function SelectLanguageMenu() {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {langNames.map((lang) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, LanguageName, theme)}
+              key={lang}
+              value={lang}
+              style={getStyles(lang, selectedLanguageNames, theme)}
             >
-              {name}
+              {lang}
             </MenuItem>
           ))}
         </Select>
