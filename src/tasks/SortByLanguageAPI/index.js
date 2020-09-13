@@ -9,7 +9,7 @@ const SortByLanguage = (LangArr, Repos) => {
         let count = 0;
         Repos.map((repo) => {
           if (repo.language === lang) {
-            repos.push(epo);
+            repos.push(repo);
             count++;
           }
         });
@@ -20,28 +20,37 @@ const SortByLanguage = (LangArr, Repos) => {
   ];
 };
 
-const fetchGithub = async () => {
+const CalculateDate = () => {
+  let today = new Date(),
+    month = "" + today.getMonth(),
+    day = "" + today.getDate(),
+    year = today.getFullYear();
+
+  return [
+    year,
+    month.length < 2 ? "0" + month : month,
+    day.length < 2 ? "0" + day : day,
+  ].join("-");
+};
+
+fetchGithub = async () => {
   let allRepos = [];
   let LanguagesNameArr = [];
   let SortedReposByLanguageArr = [];
   // fetch all repos
   allRepos = await axios
     .get(
-      "https://api.github.com/search/repositories?q=created:>2020-07-11&sort=stars&order=desc&per_page=100"
+      `https://api.github.com/search/repositories?q=created:>${CalculateDate()}&sort=stars&order=desc&per_page=100`
     )
     .then((res) => {
       return res.data.items;
     });
-
   // extract distinct languages name from repos array
   LanguagesNameArr = [...new Set(allRepos.map((repo) => repo.language))];
 
-  SortedReposByLanguageArr = SortByLanguage(
-    LanguagesNameArr,
-    SortedReposByLanguageArr
-  );
+  SortedReposByLanguageArr = SortByLanguage(LanguagesNameArr, allRepos);
 
   return SortedReposByLanguageArr;
 };
 
-fetchGithub();
+module.exports = fetchGithub;

@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const helmet = require("helmet");
+const SortByLangRoutes = require("./routes/SortedByLanguage");
 
 //init app
 const app = express();
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
+
+app.use("/", SortByLangRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV == "production") {
