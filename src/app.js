@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
 
+// routes
 app.use("/", SortByLangRoutes);
 
 // Serve static assets if in production

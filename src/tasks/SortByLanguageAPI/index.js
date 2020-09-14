@@ -1,6 +1,7 @@
 const axios = require("axios");
 const Language = require("../../models/Language");
 
+// Sort repositories by languages
 const SortByLanguage = (LangArr, Repos) => {
   return [
     ...new Set(
@@ -20,6 +21,7 @@ const SortByLanguage = (LangArr, Repos) => {
   ];
 };
 
+// calculate the date of a month before
 const CalculateDate = () => {
   let today = new Date(),
     month = "" + today.getMonth(),
@@ -33,6 +35,7 @@ const CalculateDate = () => {
   ].join("-");
 };
 
+// main algorithm to fetch and recalculate repos by language and count repos by languages
 fetchGithub = async () => {
   let allRepos = [];
   let LanguagesNameArr = [];
@@ -45,6 +48,7 @@ fetchGithub = async () => {
     .then((res) => {
       return res.data.items;
     });
+
   // extract distinct languages name from repos array
   LanguagesNameArr = [...new Set(allRepos.map((repo) => repo.language))];
 

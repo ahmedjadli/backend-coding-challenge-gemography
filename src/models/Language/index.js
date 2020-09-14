@@ -1,3 +1,4 @@
+// Describe the format of a language object
 class Language {
   constructor(name, repos, count) {
     this.name = name;
