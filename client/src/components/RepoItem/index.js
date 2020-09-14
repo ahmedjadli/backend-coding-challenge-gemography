@@ -14,6 +14,8 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import { blueGrey, yellow } from "@material-ui/core/colors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,20 +58,19 @@ const RepoItem = ({ repo, color, abv, name }) => {
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           {" "}
-          <Link href={repo.url} target="_blank">
+          <Link href={repo.html_url} target="_blank">
             Go to repository
           </Link>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Grid container>
+        <Grid container spacing="2">
           <Grid item className={classes.valign}>
-            <StarRoundedIcon style={{ color: yellow[600] }} />
+            <StarRoundedIcon style={{ color: yellow[600] }} />{" "}
             {repo.stargazers_count}
           </Grid>
           <Grid item className={classes.valign}>
-            <i className="fa fa-code-fork" aria-hidden="true"></i>
-            {repo.stargazers_count}
+            <FontAwesomeIcon icon={faCodeBranch} /> {repo.stargazers_count}
           </Grid>
         </Grid>
       </CardActions>
